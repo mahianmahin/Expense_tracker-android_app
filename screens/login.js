@@ -6,7 +6,7 @@ import { TouchableWithoutFeedback } from 'react-native-web';
 
 const baseColor = '#575DFB';
 
-export default function Register({navigation}) {
+export default function Login({navigation}) {
     let [fontLoaded, error] = useFonts({Inter_700Bold, Inter_400Regular});
 
     if (!fontLoaded) {
@@ -17,10 +17,10 @@ export default function Register({navigation}) {
 
     return (
         <View style={styles.container}>
-            <TouchableWithoutFeedback onPressIn={() => navigation.goBack()}><View onPress={() => navigation.goBack()} style={styles.back}><Image source={require('../assets/icons/back_arrow.png')} /></View></TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPressIn={() => navigation.goBack()}><View style={styles.back}><Image source={require('../assets/icons/back_arrow.png')} /></View></TouchableWithoutFeedback>
             <View style={styles.upperSection}>
-                <Text style={styles.heading}>Register</Text>
-                <Text style={{marginTop: 19}}>Create an <Text style={{fontFamily: "Inter_700Bold", color: baseColor}}>account</Text> to access all the features of <Text style={{fontFamily: "Inter_700Bold"}}>Maxpense!</Text></Text>
+                <Text style={styles.heading}>Login</Text>
+                <Text style={{marginTop: 19}}>Login now to track all your expenses and income at a place!</Text>
             </View>
 
             <View style={styles.lowerSection}>
@@ -32,13 +32,6 @@ export default function Register({navigation}) {
                     </View>
                 </View>
                 
-                <View style={styles.inputSection}>
-                    <Text style={{fontFamily: "Inter_400Regular", fontSize: 17, paddingBottom: 6}}>Your Name</Text>
-                    <View style={styles.textField}>
-                        <Image source={require('../assets/icons/user.png')} />
-                        <TextInput selectionColor={baseColor} style={styles.inputField} placeholder="Eg. Kazi Nazrul" placeholderTextColor={'#C8C8C8'} />
-                    </View>
-                </View>
                 
                 <View style={styles.inputSection}>
                     <Text style={{fontFamily: "Inter_400Regular", fontSize: 17, paddingBottom: 6}}>Your Password</Text>
@@ -46,16 +39,23 @@ export default function Register({navigation}) {
                         <Image source={require('../assets/icons/lock.png')} />
                         <TextInput secureTextEntry={true} selectionColor={baseColor} style={styles.inputField} placeholder="$PXE@KDK!#" placeholderTextColor={'#C8C8C8'} />
                     </View>
+                    <Text style={{marginTop: 6, color: baseColor}}>Forgot Password?</Text>
                 </View>
 
                 <TouchableOpacity style={styles.button}>
-                    <Text><Text style={{fontFamily: "Inter_700Bold", fontSize: 16, color: 'white'}}>Register</Text></Text>
+                    <Text><Text style={{fontFamily: "Inter_700Bold", fontSize: 16, color: 'white'}}>Login</Text></Text>
                 </TouchableOpacity>
                 
             </View>
 
+            <View style={styles.bar}></View>
+
+            <TouchableOpacity style={styles.buttonGoogle}>
+                    <Text><Image style={styles.icon} source={require('../assets/icons/google.png')} /> <Text style={{fontFamily: "Inter_700Bold", fontSize: 16}}>Continue with Google</Text></Text>
+            </TouchableOpacity>
+
             <View style={styles.lastSection}>
-                <Text style={{fontFamily: "Inter_400Regular", fontSize: 16}}>Already have an account? <Text onPress={() => navigation.navigate('login')} style={{fontFamily: "Inter_700Bold", color: baseColor}}>Login</Text></Text>
+                <Text style={{fontFamily: "Inter_400Regular", fontSize: 16}}>Don't have an account? <Text onPress={() => navigation.navigate('register')} style={{fontFamily: "Inter_700Bold", color: baseColor}}>Register</Text></Text>
             </View>
         </View>
     );
@@ -65,7 +65,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 35,
-        justifyContent: 'center'
+        marginTop: 40
+        // justifyContent: 'center'
     },
 
     heading: {
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        marginTop: 20,
+        marginTop: 10,
         color: 'white',
         borderRadius: 16,
         height: 56,
@@ -93,6 +94,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: baseColor,
+        fontFamily: "Inter_700Bold", 
+        fontSize: 16
+    },
+    
+    buttonGoogle: {
+        marginTop: 10,
+        paddingTop: 10,
+        borderWidth: 1.5,
+        borderColor: 'black',
+        borderRadius: 16,
+        height: 56,
+        flexDirection: 'row',
+        justifyContent: 'center',
         fontFamily: "Inter_700Bold", 
         fontSize: 16
     },
@@ -109,9 +123,7 @@ const styles = StyleSheet.create({
     }, 
 
     back: {
-        marginBottom: 40,
-        height: 20,
-        width: 30,
+        marginBottom: 20
     },
 
     textField: {
@@ -131,6 +143,13 @@ const styles = StyleSheet.create({
 
     inputSection: {
         marginBottom: 24
+    },
+
+    bar: {
+        height: 1,
+        backgroundColor: 'black',
+        marginTop: 20,
+        marginBottom: 20
     }
     
 })

@@ -27,7 +27,7 @@ export default function SetNewPassword() {
                     <Text style={{fontFamily: "Inter_400Regular", fontSize: 17, paddingBottom: 6}}>Email</Text>
                     <View style={styles.textField}>
                         <Image source={require('../assets/icons/lock.png')} />
-                        <TextInput selectionColor={baseColor} style={styles.inputField} placeholder="$PXE@KDK!#" placeholderTextColor={'#C8C8C8'} />
+                        <TextInput secureTextEntry={true} selectionColor={baseColor} style={styles.inputField} placeholder="$PXE@KDK!#" placeholderTextColor={'#C8C8C8'} />
                     </View>
                 </View>
 

@@ -5,7 +5,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const baseColor = '#575DFB';
 
-export default function Welcome() {
+export default function Welcome({navigation}) {
     let [fontLoaded, error] = useFonts({Inter_700Bold, Inter_400Regular});
 
     if (!fontLoaded) {
@@ -28,13 +28,13 @@ export default function Welcome() {
                     <Text><Image style={styles.icon} source={require('../assets/icons/google.png')} /> <Text style={{fontFamily: "Inter_700Bold", fontSize: 16}}>Continue with Google</Text></Text>
                 </TouchableOpacity>
                 
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('register')}>
                     <Text><Image style={styles.icon} source={require('../assets/icons/at.png')} /> <Text style={{fontFamily: "Inter_700Bold", fontSize: 16}}>Continue with Email</Text></Text>
                 </TouchableOpacity>
             </View>
 
             <View style={styles.lastSection}>
-                <Text style={{fontFamily: "Inter_400Regular", fontSize: 16}}>Already have an account? <Text style={{fontFamily: "Inter_700Bold", color: baseColor}}>Login</Text></Text>
+                <Text style={{fontFamily: "Inter_400Regular", fontSize: 16}}>Already have an account? <Text onPress={() => navigation.navigate('login')} style={{fontFamily: "Inter_700Bold", color: baseColor}}>Login</Text></Text>
             </View>
         </View>
     );
