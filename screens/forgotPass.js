@@ -1,11 +1,12 @@
 import { Inter_400Regular, Inter_700Bold, useFonts } from '@expo-google-fonts/inter';
 import React from 'react';
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native-web';
 
 
 const baseColor = '#575DFB';
 
-export default function ForgotPassword() {
+export default function ForgotPassword({navigation}) {
     let [fontLoaded, error] = useFonts({Inter_700Bold, Inter_400Regular});
 
     if (!fontLoaded) {
@@ -16,7 +17,7 @@ export default function ForgotPassword() {
 
     return (
         <View style={styles.container}>
-            <View style={styles.back}><Image source={require('../assets/icons/back_arrow.png')} /></View>
+            <TouchableWithoutFeedback onPressIn={() => navigation.goBack()}><View style={styles.back}><Image source={require('../assets/icons/back_arrow.png')} /></View></TouchableWithoutFeedback>
             <View style={styles.upperSection}>
                 <Text style={styles.heading}>Forgot Password?</Text>
                 <Text style={{marginTop: 19}}>Recover your password if you have forgot the password!</Text>

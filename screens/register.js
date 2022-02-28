@@ -1,13 +1,39 @@
 import { Inter_400Regular, Inter_700Bold, useFonts } from '@expo-google-fonts/inter';
-import React from 'react';
+import React, { useState } from 'react';
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-web';
-
 
 const baseColor = '#575DFB';
 
 export default function Register({navigation}) {
     let [fontLoaded, error] = useFonts({Inter_700Bold, Inter_400Regular});
+    const [email, setEmail] = useState('');
+    const [name, setName] = useState('');
+    const [password, setPassword] = useState('');
+
+    const header = {
+        mode: 'cors',
+        method: 'POST',
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            username: name,
+            email: email,
+            password: password
+        })
+    };
+
+    const handleRegister = () => {
+        if (email !== '' && name !== '' && password !== '') {
+            fetch('https://xpensetracker.pythonanywhere.com/signup/', header)
+            .then(
+                response => response.json()
+            ).then(
+            data => {
+                console.log(data.data);
+            }
+            )
+        }
+    }
 
     if (!fontLoaded) {
         return (
@@ -28,7 +54,7 @@ export default function Register({navigation}) {
                     <Text style={{fontFamily: "Inter_400Regular", fontSize: 17, paddingBottom: 6}}>Email</Text>
                     <View style={styles.textField}>
                         <Image source={require('../assets/icons/at.png')} />
-                        <TextInput selectionColor={baseColor} style={styles.inputField} placeholder="Eg. abc@example.com" placeholderTextColor={'#C8C8C8'} />
+                        <TextInput onChange={(e) => setEmail(e.target.value)} value={email} selectionColor={baseColor} style={styles.inputField} placeholder="Eg. abc@example.com" placeholderTextColor={'#C8C8C8'} />
                     </View>
                 </View>
                 
@@ -36,7 +62,7 @@ export default function Register({navigation}) {
                     <Text style={{fontFamily: "Inter_400Regular", fontSize: 17, paddingBottom: 6}}>Your Name</Text>
                     <View style={styles.textField}>
                         <Image source={require('../assets/icons/user.png')} />
-                        <TextInput selectionColor={baseColor} style={styles.inputField} placeholder="Eg. Kazi Nazrul" placeholderTextColor={'#C8C8C8'} />
+                        <TextInput onChange={(e) => setName(e.target.value)} value={name} selectionColor={baseColor} style={styles.inputField} placeholder="Eg. Kazi Nazrul" placeholderTextColor={'#C8C8C8'} />
                     </View>
                 </View>
                 
@@ -44,11 +70,11 @@ export default function Register({navigation}) {
                     <Text style={{fontFamily: "Inter_400Regular", fontSize: 17, paddingBottom: 6}}>Your Password</Text>
                     <View style={styles.textField}>
                         <Image source={require('../assets/icons/lock.png')} />
-                        <TextInput secureTextEntry={true} selectionColor={baseColor} style={styles.inputField} placeholder="$PXE@KDK!#" placeholderTextColor={'#C8C8C8'} />
+                        <TextInput onChange={(e) => setPassword(e.target.value)} value={password} secureTextEntry={true} selectionColor={baseColor} style={styles.inputField} placeholder="$PXE@KDK!#" placeholderTextColor={'#C8C8C8'} />
                     </View>
                 </View>
 
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={handleRegister}>
                     <Text><Text style={{fontFamily: "Inter_700Bold", fontSize: 16, color: 'white'}}>Register</Text></Text>
                 </TouchableOpacity>
                 

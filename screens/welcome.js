@@ -24,9 +24,9 @@ export default function Welcome({navigation}) {
 
             <View style={styles.lowerSection}>
                 <Text style={{fontFamily: "Inter_400Regular", fontSize: 17, paddingBottom: 5}}>Let’s Get Started...</Text>
-                <TouchableOpacity style={styles.button}>
+                {/* <TouchableOpacity style={styles.button}>
                     <Text><Image style={styles.icon} source={require('../assets/icons/google.png')} /> <Text style={{fontFamily: "Inter_700Bold", fontSize: 16}}>Continue with Google</Text></Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('register')}>
                     <Text><Image style={styles.icon} source={require('../assets/icons/at.png')} /> <Text style={{fontFamily: "Inter_700Bold", fontSize: 16}}>Continue with Email</Text></Text>

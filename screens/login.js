@@ -39,7 +39,7 @@ export default function Login({navigation}) {
                         <Image source={require('../assets/icons/lock.png')} />
                         <TextInput secureTextEntry={true} selectionColor={baseColor} style={styles.inputField} placeholder="$PXE@KDK!#" placeholderTextColor={'#C8C8C8'} />
                     </View>
-                    <Text style={{marginTop: 6, color: baseColor}}>Forgot Password?</Text>
+                    <Text onPress={() => navigation.navigate('forgot-password')} style={{marginTop: 6, color: baseColor}}>Forgot Password?</Text>
                 </View>
 
                 <TouchableOpacity style={styles.button}>
@@ -48,11 +48,11 @@ export default function Login({navigation}) {
                 
             </View>
 
-            <View style={styles.bar}></View>
+            {/* <View style={styles.bar}></View>
 
             <TouchableOpacity style={styles.buttonGoogle}>
                     <Text><Image style={styles.icon} source={require('../assets/icons/google.png')} /> <Text style={{fontFamily: "Inter_700Bold", fontSize: 16}}>Continue with Google</Text></Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
             <View style={styles.lastSection}>
                 <Text style={{fontFamily: "Inter_400Regular", fontSize: 16}}>Don't have an account? <Text onPress={() => navigation.navigate('register')} style={{fontFamily: "Inter_700Bold", color: baseColor}}>Register</Text></Text>
