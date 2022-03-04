@@ -10,30 +10,47 @@ export default function Register({navigation}) {
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
-
-    const header = {
-        mode: 'cors',
-        method: 'POST',
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-            username: name,
-            email: email,
-            password: password
-        })
-    };
+    const [loading, setLoading] = useState(false);
 
     const handleRegister = () => {
         if (email !== '' && name !== '' && password !== '') {
+            const header = {
+                mode: 'cors',
+                method: 'POST',
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    username: name,
+                    email: email,
+                    password: password
+                })
+            };
+    
             fetch('https://xpensetracker.pythonanywhere.com/signup/', header)
             .then(
-                response => response.json()
+                response => {
+                    setLoading(true);
+                    console.log('proccess started...')
+                    return response.json();
+                }
             ).then(
-            data => {
-                console.log(data.data);
-            }
-            )
+                data => {
+                    console.log(data);
+                    console.log('process finished...');
+                    setLoading(false);
+                    navigation.navigate('login');
+                }
+            ).catch(error => {
+                console.log(error)
+            })
+        } else {
+            alert("Fill up all the fields correctly!");
         }
     }
+
+
 
     if (!fontLoaded) {
         return (
@@ -54,7 +71,7 @@ export default function Register({navigation}) {
                     <Text style={{fontFamily: "Inter_400Regular", fontSize: 17, paddingBottom: 6}}>Email</Text>
                     <View style={styles.textField}>
                         <Image source={require('../assets/icons/at.png')} />
-                        <TextInput onChange={(e) => setEmail(e.target.value)} value={email} selectionColor={baseColor} style={styles.inputField} placeholder="Eg. abc@example.com" placeholderTextColor={'#C8C8C8'} />
+                        <TextInput onChangeText={(value) => setEmail(value)} value={email} selectionColor={baseColor} style={styles.inputField} placeholder="Eg. abc@example.com" placeholderTextColor={'#C8C8C8'} />
                     </View>
                 </View>
                 
@@ -62,7 +79,7 @@ export default function Register({navigation}) {
                     <Text style={{fontFamily: "Inter_400Regular", fontSize: 17, paddingBottom: 6}}>Your Name</Text>
                     <View style={styles.textField}>
                         <Image source={require('../assets/icons/user.png')} />
-                        <TextInput onChange={(e) => setName(e.target.value)} value={name} selectionColor={baseColor} style={styles.inputField} placeholder="Eg. Kazi Nazrul" placeholderTextColor={'#C8C8C8'} />
+                        <TextInput onChangeText={(value) => setName(value)} value={name} selectionColor={baseColor} style={styles.inputField} placeholder="Eg. Kazi Nazrul" placeholderTextColor={'#C8C8C8'} />
                     </View>
                 </View>
                 
@@ -70,7 +87,7 @@ export default function Register({navigation}) {
                     <Text style={{fontFamily: "Inter_400Regular", fontSize: 17, paddingBottom: 6}}>Your Password</Text>
                     <View style={styles.textField}>
                         <Image source={require('../assets/icons/lock.png')} />
-                        <TextInput onChange={(e) => setPassword(e.target.value)} value={password} secureTextEntry={true} selectionColor={baseColor} style={styles.inputField} placeholder="$PXE@KDK!#" placeholderTextColor={'#C8C8C8'} />
+                        <TextInput onChangeText={(value) => setPassword(value)} value={password} secureTextEntry={true} selectionColor={baseColor} style={styles.inputField} placeholder="$PXE@KDK!#" placeholderTextColor={'#C8C8C8'} />
                     </View>
                 </View>
 
@@ -153,6 +170,7 @@ const styles = StyleSheet.create({
     inputField: {
         marginLeft: 15,
         fontSize: 16,
+        width: 220
     },
 
     inputSection: {

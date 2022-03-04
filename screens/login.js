@@ -139,6 +139,8 @@ const styles = StyleSheet.create({
     inputField: {
         marginLeft: 15,
         fontSize: 16,
+        width: 220,
+        
     },
 
     inputSection: {
