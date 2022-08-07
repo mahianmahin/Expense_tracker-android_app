@@ -1,5 +1,5 @@
 import { Inter_400Regular, Inter_700Bold, useFonts } from '@expo-google-fonts/inter';
-import React from 'react';
+import { useState } from 'react';
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-web';
 
@@ -8,6 +8,47 @@ const baseColor = '#575DFB';
 
 export default function Login({navigation}) {
     let [fontLoaded, error] = useFonts({Inter_700Bold, Inter_400Regular});
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleLogin = () => {
+        if (username !== '' && password !== '') {
+            const header = {
+                mode: 'cors',
+                method: 'POST',
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    username: name,
+                    email: email,
+                    password: password
+                })
+            };
+
+    
+            fetch('https://xpensetracker.pythonanywhere.com/signup/', header)
+            .then(
+                response => {
+                    setLoading(true);
+                    console.log('proccess started...')
+                    return response.json();
+                }
+            ).then(
+                data => {
+                    console.log(data);
+                    console.log('process finished...');
+                    setLoading(false);
+                    navigation.navigate('login');
+                }
+            ).catch(error => {
+                console.log(error)
+            })
+        } else {
+            alert("Fill up all the fields correctly!");
+        }
+    }
 
     if (!fontLoaded) {
         return (

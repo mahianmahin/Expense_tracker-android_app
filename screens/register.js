@@ -62,7 +62,7 @@ export default function Register({navigation}) {
         <View style={styles.container}>
             <TouchableWithoutFeedback onPressIn={() => navigation.goBack()}><View onPress={() => navigation.goBack()} style={styles.back}><Image source={require('../assets/icons/back_arrow.png')} /></View></TouchableWithoutFeedback>
             <View style={styles.upperSection}>
-                <Text style={styles.heading}>Register</Text>
+                <Text style={styles.heading}>Registerrrr</Text>
                 <Text style={{marginTop: 19}}>Create an <Text style={{fontFamily: "Inter_700Bold", color: baseColor}}>account</Text> to access all the features of <Text style={{fontFamily: "Inter_700Bold"}}>Maxpense!</Text></Text>
             </View>
 

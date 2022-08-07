@@ -18,6 +18,7 @@ export default function App() {
     <View style={styles.container}>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{headerShown: false}}>
+        {/* <Stack.Navigator > */}
           <Stack.Screen name="welcome" component={Welcome} />
           <Stack.Screen name="register" component={Register} />
           <Stack.Screen name="register-verification" component={RegisterVerification} />
